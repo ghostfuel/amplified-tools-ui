@@ -21,3 +21,14 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Environment
+.env
+.env*
+!.env.example
+config.js
+!example.config.js
+
+# configuration
+config.ts
+!config.example.ts

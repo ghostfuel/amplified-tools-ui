@@ -1,0 +1,28 @@
+.column {
+  margin: 0 0 2rem 0;
+  text-align: center;
+}
+
+.title, .title:hover {
+  font-size: 13px;
+  font-weight: bold;
+  color: whitesmoke;
+}
+
+.subtitle {
+  font-size: 12px;
+  font-weight: lighter;
+}
+
+.image {
+  height: 150px;
+  width: 150px;
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.image:hover {
+  background-color: red;
+  opacity: 0.6;
+  transition: 0.3s;
+}

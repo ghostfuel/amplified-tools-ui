@@ -1,0 +1,28 @@
+#section-tiles {
+  text-align: center;
+}
+
+#tile {
+  height: 150px;
+  width: 150px;
+  cursor: pointer;
+  object-fit: cover;
+  margin: 0 0 .5rem 0;
+}
+
+#tile-icon {
+  margin: 35px;
+  height: 80px;
+  width: 80px;
+}
+
+.column {
+  margin: 0 0 2rem 0;
+}
+
+.title, .title:hover {
+  font-size: 13px;
+  font-weight: bold;
+  color: whitesmoke;
+  text-align: center;
+}

@@ -1,0 +1,25 @@
+#section-title {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#toolbar {
+    /* margin-top: 1rem; */
+    /* margin-bottom: 1rem; */
+    padding: 1rem;
+    background-color: #343A40;
+}
+
+.btn-margin {
+    margin: 0 0.5rem 0 0 ;
+}
