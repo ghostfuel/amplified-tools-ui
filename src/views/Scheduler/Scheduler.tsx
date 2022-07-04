@@ -6,8 +6,10 @@ import { SpotifyContext, SpotifyContextType } from '../../contexts/SpotifyProvid
 import { spotify } from '../../utils/spotifyApi';
 import { API } from '../../config';
 import { CognitoContext, CognitoContextType } from '../../contexts/CognitoProvider';
+import { useNavigate } from 'react-router-dom';
 
-const Scheduler: FunctionComponent = (props) => {
+const Scheduler: FunctionComponent = () => {
+    const navigate = useNavigate();
     const { idToken } = useContext(CognitoContext) as CognitoContextType;
     const { spotifyTokens, setSpotifyTokens } = useContext(SpotifyContext) as SpotifyContextType;
 
@@ -50,7 +52,7 @@ const Scheduler: FunctionComponent = (props) => {
 
         try {
             if (idToken) {
-                const response = await fetch(`${API.API_BASE_URL}/scheduler/create`, {
+                await fetch(`${API.API_BASE_URL}/schedules/create`, {
                     method: "POST",
                     headers: { Authorization: idToken, spotify: spotifyTokens?.access_token || "" },
                     body: JSON.stringify({
@@ -66,7 +68,7 @@ const Scheduler: FunctionComponent = (props) => {
                     })
                 });
 
-                console.log("Success", response.body);
+                navigate("/schedules")
             }
         } catch (error) {
             console.error("Failed to create schedule", error);

@@ -46,7 +46,6 @@ const ScheduleTable: FunctionComponent<ScheduleTableProps> = (props) => {
                     const response = await fetch(`${API.API_BASE_URL}/schedules`, {
                         headers: { Authorization: idToken }
                     });
-                    console.log("Fetched schedules", response.body);
                     return response.json();
                 }
             } catch (error) {

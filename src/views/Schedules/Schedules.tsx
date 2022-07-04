@@ -1,16 +1,17 @@
-import { FunctionComponent, useEffect } from 'react';
-import { Col, Row } from "react-bootstrap";
+import { FunctionComponent } from 'react';
+import { Button, Col, Row } from "react-bootstrap";
 import Toolbar from '../../components/Toolbar/Toolbar';
 import ScheduleTable from '../../components/ScheduleTable/ScheduleTable';
-
+import { useNavigate } from 'react-router-dom';
 
 const Schedules: FunctionComponent = () => {
-    useEffect(() => { })
+    const navigate = useNavigate();
 
     return (
         <Row>
             <Col>
                 <Toolbar>
+                    <Button className="toolbar-btn btn-dark ms-3" onClick={() => navigate("/schedules/create")}>New Schedule</Button>
                 </Toolbar>
             </Col>
             <Row>
