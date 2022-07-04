@@ -101,12 +101,17 @@ const CognitoLogin: FunctionComponent = () => {
         }
     }
 
+    function validatePassword() {
+        // Password must be 8 Characters, at least 1 of each; Uppercase, Lowercase, Special
+        const passwordPolicy = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+        return passwordPolicy.test(password);
+    }
+
     function validateForm() {
         const emailValid = email.length > 3;
-        // TODO: Password must be 8 Charactes, at least 1 of each; Uppercase, Lowercase, Symbol
-        let passwordValid = password.length > 8;
+        let passwordValid = password.length > 0;
 
-        if (passwordConfirmation.length > 0) {
+        if (formType === "verification") {
             passwordValid = passwordValid && passwordConfirmation === password;
         }
 
@@ -125,6 +130,7 @@ const CognitoLogin: FunctionComponent = () => {
                                 value={email}
                                 placeholder="Email"
                                 onChange={(e) => setEmail(e.target.value)}
+                                required
                             />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="password">
@@ -133,6 +139,7 @@ const CognitoLogin: FunctionComponent = () => {
                                 value={password}
                                 placeholder="Password"
                                 onChange={(e) => setPassword(e.target.value)}
+                                required
                             />
                         </Form.Group>
                         <div className="d-flex">
@@ -144,7 +151,7 @@ const CognitoLogin: FunctionComponent = () => {
                 </Tab>
                 <Tab eventKey="signUp" title="Sign Up">
                     <Form id="signUpForm" onSubmit={handleSignUp} className="mt-3">
-                        <Form.Group className="mb-3" controlId="signUpemail">
+                        <Form.Group className="mb-3" controlId="signUpEmail">
                             <Form.Control
                                 autoFocus
                                 type="email"
@@ -152,7 +159,9 @@ const CognitoLogin: FunctionComponent = () => {
                                 placeholder="Email"
                                 disabled={formType === "verification"}
                                 onChange={(e) => setEmail(e.target.value)}
+                                isInvalid={email.length === 0}
                             />
+                            <Form.Control.Feedback type="invalid">An email address is required</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="signUpPassword">
                             <Form.Control
@@ -161,7 +170,10 @@ const CognitoLogin: FunctionComponent = () => {
                                 placeholder="Password"
                                 disabled={formType === "verification"}
                                 onChange={(e) => setPassword(e.target.value)}
+                                isValid={validatePassword()}
+                                isInvalid={!validatePassword()}
                             />
+                            <Form.Control.Feedback type="invalid">Passwords must be longer than 8 characters, including at least one lowercase, uppercase and special character</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="signUpPasswordConfirmation">
                             <Form.Control
@@ -170,7 +182,10 @@ const CognitoLogin: FunctionComponent = () => {
                                 placeholder="Confirm Password"
                                 disabled={formType === "verification"}
                                 onChange={(e) => setPasswordConfirmation(e.target.value)}
+                                isValid={password === passwordConfirmation && validatePassword()}
+                                isInvalid={password !== passwordConfirmation}
                             />
+                            <Form.Control.Feedback type="invalid">Passwords must match</Form.Control.Feedback>
                         </Form.Group>
                         <div className="d-flex">
                             <Button type="submit" disabled={!validateForm() || formType === "verification"} className="w-100">
