@@ -28,29 +28,22 @@ const Dashboard: FunctionComponent = () => {
     }, [spotifyTokens?.access_token])
 
     return (
-        <>
-            <Container className='container-xl'>
-                <Col>
-                    <Row id="dashboard-header">
-                        {user?.images ? <Image id="avatar" alt="avatar" roundedCircle src={user?.images[0]?.url} /> : <Placeholder id="avatar-placeholder" />}
-                        {/* <Placeholder id="avatar" className="ps-1 pe-1 rounded-circle" /> */}
-                        <Col>
-                            <div className="text-capitalize text-left">
-                                <div style={{ fontSize: 12 }}>{user?.type} ({user?.product})</div>
-                                <a id="display-name" href={user?.external_urls.spotify}>{user?.display_name}</a>
-                                <div style={{ fontSize: 12 }}>{user?.followers?.total} Followers</div>
-                            </div>
-                        </Col>
-                    </Row>
-                    {/* <Col>
-                        <div id="section-title" className="text-left">
-                            Tools
+        <Container className='container-xl'>
+            <Col>
+                <Row id="dashboard-header">
+                    {user?.images ? <Image id="avatar" alt="avatar" roundedCircle src={user?.images[0]?.url} /> : <Placeholder id="avatar-placeholder" />}
+                    <Col>
+                        <div className="text-capitalize text-left">
+                            <div style={{ fontSize: 12 }}>{user?.type} ({user?.product})</div>
+                            <a id="display-name" href={user?.external_urls.spotify}>{user?.display_name}</a>
+                            <div style={{ fontSize: 12 }}>{user?.followers?.total} Followers</div>
                         </div>
-                    </Col> */}
-                    <Outlet />
-                </Col>
-            </Container>
-        </>
+                    </Col>
+                </Row>
+
+                <Outlet />
+            </Col>
+        </Container>
     );
 };
 

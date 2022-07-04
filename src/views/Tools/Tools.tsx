@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { SortDown, CalendarWeek, PersonCircle, Award } from 'react-bootstrap-icons';
+import { SortDown, CalendarWeek, PersonCircle, Award, CalendarPlus } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 import "./Tools.css";
 
@@ -10,7 +10,8 @@ const Tools: FunctionComponent<ToolsProps> = (props) => {
     const navigate = useNavigate()
 
     return (
-        <Row>
+        <Col>
+            <div id="section-title" className="text-left">Spotify</div>
             <Row id="dashboard-tools" className='row-cols-auto'>
                 <Col>
                     <div id="section-tiles">
@@ -28,24 +29,35 @@ const Tools: FunctionComponent<ToolsProps> = (props) => {
                         <div className="title">My Top Played</div>
                     </div>
                 </Col>
+            </Row>
+            <div id="section-title" className="text-left">Tools</div>
+            <Row id="dashboard-tools" className='row-cols-auto'>
+                <Col>
+                    <div id="section-tiles">
+                        <div id="tile" className="bg-secondary">
+                            <CalendarWeek id="tile-icon" fill="#212529" onClick={() => navigate("/schedules")} />
+                        </div>
+                        <div className="title">My Schedules</div>
+                    </div>
+                </Col>
+                <Col>
+                    <div id="section-tiles">
+                        <div id="tile" className="bg-secondary">
+                            <CalendarPlus id="tile-icon" fill="#212529" onClick={() => navigate("/schedules/create")} />
+                        </div>
+                        <div className="title">Create Schedule</div>
+                    </div>
+                </Col>
                 <Col>
                     <div id="section-tiles">
                         <div id="tile" className="bg-secondary">
                             <SortDown id="tile-icon" fill="#212529" onClick={() => navigate("/sort-playlist")} />
                         </div>
-                        <div className="title">Sort Playlists</div>
-                    </div>
-                </Col>
-                <Col>
-                    <div id="section-tiles">
-                        <div id="tile" className="bg-secondary">
-                            <CalendarWeek id="tile-icon" fill="#212529" onClick={() => navigate("/scheduler")} />
-                        </div>
-                        <div className="title">Create Schedule</div>
+                        <div className="title">Sort Playlist</div>
                     </div>
                 </Col>
             </Row>
-        </Row>
+        </Col>
     )
 };
 

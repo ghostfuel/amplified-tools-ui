@@ -6,8 +6,6 @@ import { SpotifyContext, SpotifyContextType } from '../../contexts/SpotifyProvid
 import { spotify } from '../../utils/spotifyApi';
 import { API } from '../../config';
 import { CognitoContext, CognitoContextType } from '../../contexts/CognitoProvider';
-import ScheduleTable from '../../components/ScheduleTable/ScheduleTable';
-
 
 const Scheduler: FunctionComponent = (props) => {
     const { idToken } = useContext(CognitoContext) as CognitoContextType;
@@ -123,7 +121,6 @@ const Scheduler: FunctionComponent = (props) => {
                             Create schedule
                         </Button>
                     </div>
-                    <ScheduleTable />
                 </Col>
             </Row>
         </Row>

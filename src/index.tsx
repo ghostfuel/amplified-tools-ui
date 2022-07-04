@@ -20,13 +20,11 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
-    <CognitoProvider>
-      <SpotifyProvider>
-        <App />
-      </SpotifyProvider>
-    </CognitoProvider>
-  </React.StrictMode>
+  <CognitoProvider>
+    <SpotifyProvider>
+      <App />
+    </SpotifyProvider>
+  </CognitoProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

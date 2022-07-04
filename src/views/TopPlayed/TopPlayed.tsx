@@ -12,7 +12,7 @@ type TopPlayedProps = {
 }
 
 const TopPlayed: FunctionComponent<TopPlayedProps> = (props) => {
-  const [limit, setLimit] = useState(6 || props.limit);
+  const [limit, setLimit] = useState(12 || props.limit);
   const [range, setRange] = useState("medium_term" || props.range);
   const [topTracks, setTopTracks] = useState<{ items: any[] }>({ items: [] });
   const [topArtists, setTopArtists] = useState<{ items: any[] }>({ items: [] });
@@ -51,7 +51,7 @@ const TopPlayed: FunctionComponent<TopPlayedProps> = (props) => {
           </InputGroup>
           <InputGroup>
             <InputGroup.Text>Limit</InputGroup.Text>
-            <FormControl type="number" value={limit} onChange={({ target }) => setLimit(parseInt(target.value))} max={50} style={{ width: "4rem" }} />
+            <FormControl type="number" value={limit} step={6} onChange={({ target }) => setLimit(parseInt(target.value))} max={50} style={{ width: "4rem" }} />
           </InputGroup>
         </Toolbar>
       </Col>
