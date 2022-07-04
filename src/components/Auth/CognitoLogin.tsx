@@ -26,7 +26,7 @@ const CognitoLogin: FunctionComponent = () => {
         try {
             const user = await Auth.signIn(username, password) as CognitoUser;
             console.log("Successful sign in", user);
-            const jwt = user.getSignInUserSession()?.getAccessToken().getJwtToken();
+            const jwt = user.getSignInUserSession()?.getIdToken().getJwtToken();
 
             if (jwt) {
                 setAuthenticated(true, jwt)

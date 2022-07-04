@@ -21,7 +21,7 @@ const ProtectedRoute: FunctionComponent<ProtectedRouteProps> = ({ children }) =>
         async function onLoad() {
             try {
                 const user = await Auth.currentSession();
-                const jwt = user?.getAccessToken().getJwtToken();
+                const jwt = user?.getIdToken().getJwtToken();
                 setAuthenticated(true, jwt);
             } catch (error: any) {
                 console.log("Failed to load current session:", error)

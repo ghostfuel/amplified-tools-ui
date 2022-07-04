@@ -54,8 +54,8 @@ const Playlists: FunctionComponent<PlaylistsProps> = (props) => {
                 const response = await fetch(`${API.API_BASE_URL}/playlist/${selectedPlaylist}/sort?property=${sortProperty}&order=${sortOrder}`, {
                     headers: { Authorization: idToken, spotify: spotifyTokens?.access_token || "" }
                 });
-
-                console.log("Success", response.body);
+                const responseText = await response.text()
+                console.log("Success", responseText);
             }
         } catch (error) {
             console.error("Failed to sort playlist", error);
