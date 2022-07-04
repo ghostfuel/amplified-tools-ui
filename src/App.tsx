@@ -13,7 +13,7 @@ import Tools from "./views/Tools/Tools";
 import TopPlayed from "./views/TopPlayed/TopPlayed";
 import Playlists from "./views/Playlists/Playlists";
 import Scheduler from "./views/Scheduler/Scheduler";
-// import { Col, Container } from "react-bootstrap";
+import Schedules from "./views/Schedules/Schedules";
 
 
 const App: FunctionComponent = () => {
@@ -32,17 +32,11 @@ const App: FunctionComponent = () => {
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>}></Route>
           <Route path="/top-played" element={<ProtectedRoute><TopPlayed /></ProtectedRoute>}></Route>
           <Route path="/sort-playlist" element={<ProtectedRoute><Playlists /></ProtectedRoute>}></Route>
-          <Route path="/scheduler" element={<ProtectedRoute><Scheduler /></ProtectedRoute>}></Route>
+          <Route path="/schedules" element={<ProtectedRoute><Schedules /></ProtectedRoute>}></Route>
+          <Route path="/schedules/create" element={<ProtectedRoute><Scheduler /></ProtectedRoute>}></Route>
         </Route>
         <Route path="/login" element={<CognitoLogin />} />
       </Routes>
-      {/* <div className="position-absolute bottom-0 w-100 mb-4">
-        <Container className="justify-content-center text-center border-top border-secondary">
-          <Col>
-            <footer className="mt-4 text-muted">Made with 🍊<br /> Icons supplied by Freepik, Pause08, Anggara</footer>
-          </Col>
-        </Container>
-      </div> */}
     </BrowserRouter>
   );
 };
