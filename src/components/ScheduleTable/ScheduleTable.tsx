@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useMemo, FunctionComponent, useContext } f
 import { AgGridReact } from "ag-grid-react";
 import { API } from "../../config";
 import { CognitoContext, CognitoContextType } from "../../contexts/CognitoProvider";
+import ActionsRenderer from "./CellRenderers/ActionsRenderer";
 
 type ScheduleTableProps = {}
 
@@ -11,11 +12,53 @@ const ScheduleTable: FunctionComponent<ScheduleTableProps> = (props) => {
     const [rowData, setRowData] = useState();
 
     const [columnDefs] = useState([
-        { field: 'operation', width: 60 },
-        { field: 'cadence', width: 60 },
+        { field: 'schedule' },
+        { field: 'operation', width: 55 },
+        { field: 'cadence', width: 55 },
+        { field: 'createdAt', headerName: 'Created', type: 'date', width: 80 },
+        { field: 'scheduledTimestamp', headerName: 'First run', type: 'date', width: 80 },
+        { field: 'runCount', headerName: 'Runs', width: 45 },
+        { field: 'errorCount', headerName: 'Errors', width: 45 },
+        // Hidden temporarily
         {
             headerName: 'Parameters',
             field: 'operationParameters',
+            type: 'object',
+            hide: true,
+            width: 120
+        },
+        {
+            headerName: 'Actions',
+            cellRenderer: ActionsRenderer,
+            cellRendererParams: {
+                deleteHandler: async (scheduleId: string) => {
+                    try {
+                        if (idToken) {
+                            const response = await fetch(`${API.API_BASE_URL}/schedules/${scheduleId}`, {
+                                method: "DELETE",
+                                headers: { Authorization: idToken }
+                            });
+                            return response;
+                        }
+                    } catch (error) {
+                        console.error(`Failed to delete schedule ${scheduleId}`, error);
+                    }
+                }
+            },
+            width: 60
+        }
+    ]);
+
+    const defaultColDef = useMemo(() => ({
+        sortable: true,
+        resizable: true
+    }), []);
+
+    const columnTypes = useMemo(() => ({
+        date: {
+            valueFormatter: (params: any) => new Date(params.value).toDateString()
+        },
+        object: {
             // Map object to Key: Value text list, one per line and reduce spacing
             cellRenderer: (params: any) => {
                 let cellValues = [];
@@ -27,15 +70,7 @@ const ScheduleTable: FunctionComponent<ScheduleTableProps> = (props) => {
                 return (<div style={{ "lineHeight": "25px" }}>{cellValues.map((item, idx) => <span key={idx}>{item}<br /></span>)}</div>);
             },
             autoHeight: true,
-            width: 120
-        },
-        { field: 'timestamp', headerName: 'First run', width: 100 },
-        { field: 'count', headerName: 'Times ran', width: 100 },
-    ]);
-
-    const defaultColDef = useMemo(() => ({
-        sortable: true,
-        resizable: true
+        }
     }), []);
 
     // Example load data from sever
@@ -61,11 +96,11 @@ const ScheduleTable: FunctionComponent<ScheduleTableProps> = (props) => {
     return (
         <div className="ag-theme-amplified-dark" style={{ width: 'auto', height: 500 }}>
             <AgGridReact
-                ref={gridRef} // Ref for accessing Grid's API
-                rowData={rowData} // Row Data for Rows
-                columnDefs={columnDefs} // Column Defs for Columns
-                defaultColDef={defaultColDef} // Default Column Properties
-                animateRows={true} // Optional - set to 'true' to have rows animate when sorted
+                ref={gridRef}
+                rowData={rowData}
+                columnDefs={columnDefs}
+                defaultColDef={defaultColDef}
+                columnTypes={columnTypes}
             />
         </div>
     );

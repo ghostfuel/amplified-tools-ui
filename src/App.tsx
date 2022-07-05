@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Appbar from "./components/Appbar/Appbar";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -23,12 +23,7 @@ const App: FunctionComponent = () => {
     <BrowserRouter>
       <Appbar logo={logo} title="Amplified" />
       <Routes>
-        <Route path="/" element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        }
-        >
+        <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>
           <Route path="/" element={<Tools />}></Route>
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>}></Route>
           <Route path="/top-played" element={<ProtectedRoute><TopPlayed /></ProtectedRoute>}></Route>
@@ -42,6 +37,5 @@ const App: FunctionComponent = () => {
     </BrowserRouter>
   );
 };
-
 
 export default App;

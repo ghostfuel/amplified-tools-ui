@@ -13,6 +13,7 @@ const Scheduler: FunctionComponent = () => {
     const { idToken } = useContext(CognitoContext) as CognitoContextType;
     const { spotifyTokens, setSpotifyTokens } = useContext(SpotifyContext) as SpotifyContextType;
 
+    const [scheduleName, setScheduleName] = useState("");
     const [selectedPlaylist, setSelectedPlaylist] = useState("");
     const [sortProperty, setSortProperty] = useState("track.artists");
     const [sortOrder, setSortOrder] = useState("asc");
@@ -56,6 +57,7 @@ const Scheduler: FunctionComponent = () => {
                     method: "POST",
                     headers: { Authorization: idToken, spotify: spotifyTokens?.access_token || "" },
                     body: JSON.stringify({
+                        name: scheduleName,
                         operation: "sort",
                         operationParameters: {
                             playlistId: selectedPlaylist,
@@ -85,6 +87,10 @@ const Scheduler: FunctionComponent = () => {
                 <Col>
                     <div id="section-title" className="text-left">Create Schedule</div>
                     <div className="d-grid gap-3">
+                        <InputGroup className="btn-margin">
+                            <InputGroup.Text>Name</InputGroup.Text>
+                            <FormControl type="text" required onChange={({ target }) => setScheduleName(target.value)} />
+                        </InputGroup>
                         <InputGroup className="btn-margin">
                             <InputGroup.Text>Playlist</InputGroup.Text>
                             <FormSelect onChange={({ target }) => setSelectedPlaylist(target.value)}>
