@@ -1,12 +1,10 @@
 import { FunctionComponent } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
-import CognitoLogin from "./components/Auth/CognitoLogin";
 import Appbar from "./components/Appbar/Appbar";
-
-import "./App.css"
-import logo from './logo.svg';
 import ProtectedRoute from "./components/ProtectedRoute";
+import VerificationForm from "./components/VerificationForm/VerificationForm";
+
 import Dashboard from "./views/Dashboard/Dashboard";
 import Profile from "./views/Profile/Profile";
 import Tools from "./views/Tools/Tools";
@@ -14,7 +12,10 @@ import TopPlayed from "./views/TopPlayed/TopPlayed";
 import Playlists from "./views/Playlists/Playlists";
 import Scheduler from "./views/Scheduler/Scheduler";
 import Schedules from "./views/Schedules/Schedules";
+import SignIn from "./views/SignIn/SignIn";
 
+import logo from './logo.svg';
+import "./App.css"
 
 const App: FunctionComponent = () => {
 
@@ -35,7 +36,8 @@ const App: FunctionComponent = () => {
           <Route path="/schedules" element={<ProtectedRoute><Schedules /></ProtectedRoute>}></Route>
           <Route path="/schedules/create" element={<ProtectedRoute><Scheduler /></ProtectedRoute>}></Route>
         </Route>
-        <Route path="/login" element={<CognitoLogin />} />
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/verify" element={<VerificationForm />} />
       </Routes>
     </BrowserRouter>
   );

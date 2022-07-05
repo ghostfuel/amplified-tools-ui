@@ -27,7 +27,7 @@ const ProtectedRoute: FunctionComponent<ProtectedRouteProps> = ({ children }) =>
                 console.log("Failed to load current session:", error)
                 setAuthenticated(false);
 
-                if (error === "No current user") navigate("/login", { replace: true })
+                if (error === "No current user") navigate("/sign-in", { replace: true })
             }
         }
 
@@ -51,7 +51,7 @@ const ProtectedRoute: FunctionComponent<ProtectedRouteProps> = ({ children }) =>
                 setSpotifyTokens(accessToken, refreshToken);
                 return <Navigate to={location.pathname} state={{ from: location }} replace />
             } else {
-                console.log("Missing access token", error, errorDescription);
+                console.log("Spotify failed to authorise", error, errorDescription);
                 // TODO: Error page... / Sign out
             }
         } else {

@@ -29,11 +29,11 @@ const Appbar: FunctionComponent<AppBarProps> = (props) => {
 
   function logOutClick() {
     signOut()
-    navigate("/login")
+    navigate("/sign-in")
   }
 
   function loginClick() {
-    navigate("/login")
+    navigate("/sign-in")
   }
 
   return (<nav className="navbar navbar-dark bg-dark">
