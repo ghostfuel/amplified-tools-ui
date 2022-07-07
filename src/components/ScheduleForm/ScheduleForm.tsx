@@ -67,7 +67,7 @@ const ScheduleForm: FunctionComponent = () => {
                     const timeOffset = new Date().getTimezoneOffset() / 60;
                     const scheduleDate = new Date(schedule.scheduledTimestamp);
                     scheduleDate.setHours(scheduleDate.getHours() - timeOffset);
-                    const setTime = scheduleDate.toISOString().slice(0, 19)
+                    const setTime = scheduleDate.toISOString().slice(0, 16)
                     setScheduleTimestamp(setTime);
                 }
             } catch (error) {
