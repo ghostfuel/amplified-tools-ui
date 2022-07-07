@@ -14,9 +14,6 @@ const Appbar: FunctionComponent<AppBarProps> = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  // const environment = process.env.REACT_APP_NAME;
-  // const version = process.env.REACT_APP_VERSION;
-  // const dev = environment?.includes("dev") ? `[${environment} v${version}]` : null;
 
   async function signOut() {
     try {
