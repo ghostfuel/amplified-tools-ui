@@ -13,7 +13,7 @@ const ScheduleTable: FunctionComponent<ScheduleTableProps> = (props) => {
 
     const [columnDefs] = useState([
         { field: 'schedule' },
-        { field: 'operation', width: 55 },
+        { field: 'operation', width: 60 },
         { field: 'cadence', width: 55 },
         { field: 'createdAt', headerName: 'Created', type: 'date', width: 80 },
         { field: 'scheduledTimestamp', headerName: 'First run', type: 'date', width: 80 },
@@ -45,7 +45,7 @@ const ScheduleTable: FunctionComponent<ScheduleTableProps> = (props) => {
                     }
                 }
             },
-            width: 60
+            width: 80
         }
     ]);
 

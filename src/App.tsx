@@ -10,8 +10,8 @@ import Profile from "./views/Profile/Profile";
 import Tools from "./views/Tools/Tools";
 import TopPlayed from "./views/TopPlayed/TopPlayed";
 import Playlists from "./views/Playlists/Playlists";
-import Scheduler from "./views/Scheduler/Scheduler";
 import Schedules from "./views/Schedules/Schedules";
+import CreateSchedule from "./views/CreateSchedule/CreateSchedule";
 import SignIn from "./views/SignIn/SignIn";
 
 import logo from './logo.svg';
@@ -29,7 +29,8 @@ const App: FunctionComponent = () => {
           <Route path="/top-played" element={<ProtectedRoute><TopPlayed /></ProtectedRoute>}></Route>
           <Route path="/sort-playlist" element={<ProtectedRoute><Playlists /></ProtectedRoute>}></Route>
           <Route path="/schedules" element={<ProtectedRoute><Schedules /></ProtectedRoute>}></Route>
-          <Route path="/schedules/create" element={<ProtectedRoute><Scheduler /></ProtectedRoute>}></Route>
+          <Route path="/schedules/create" element={<ProtectedRoute><CreateSchedule /></ProtectedRoute>}></Route>
+          <Route path="/schedules/:scheduleId" element={<ProtectedRoute><CreateSchedule edit={true} /></ProtectedRoute>}></Route>
         </Route>
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/verify" element={<VerificationForm />} />

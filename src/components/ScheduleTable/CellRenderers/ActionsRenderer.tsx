@@ -1,7 +1,8 @@
 import { FunctionComponent } from "react";
 import { ICellRendererParams } from "ag-grid-community";
-import { Button, ButtonToolbar } from "react-bootstrap";
-import { Trash } from "react-bootstrap-icons";
+import { Button, ButtonGroup } from "react-bootstrap";
+import { Eye, Pencil, Trash } from "react-bootstrap-icons";
+import { useNavigate } from "react-router-dom";
 
 interface ActionsRendererProps extends ICellRendererParams {
     deleteHandler: (scheduleId: string) => Promise<Response>
@@ -9,6 +10,22 @@ interface ActionsRendererProps extends ICellRendererParams {
 
 const ActionsRenderer: FunctionComponent<ActionsRendererProps> = (props) => {
     const { deleteHandler, api, data } = props;
+    const navigate = useNavigate();
+
+    // TODO: Use modals instead
+    function viewRow() {
+        let cellValues = [`${data.schedule} parameters;\n`];
+
+        for (const property in data.operationParameters) {
+            cellValues.push(`${property}: ${data.operationParameters[property]}`)
+        }
+
+        window.confirm(cellValues.join('\n'))
+    }
+
+    function editRow() {
+        navigate(`/schedules/${data.id}`)
+    }
 
     async function deleteRow(force = false) {
         let confirm = true;
@@ -30,11 +47,17 @@ const ActionsRenderer: FunctionComponent<ActionsRendererProps> = (props) => {
     };
 
     return (
-        <ButtonToolbar className="mt-1">
-            <Button size="sm" variant="secondary" onClick={() => deleteRow()}>
-                <Trash />
+        <ButtonGroup className="mb-1">
+            <Button size="sm" variant="secondary" onClick={() => viewRow()}>
+                <Eye className="mb-1" />
             </Button>
-        </ButtonToolbar>
+            <Button size="sm" variant="secondary" onClick={() => editRow()}>
+                <Pencil className="mb-1" />
+            </Button>
+            <Button size="sm" variant="secondary" onClick={() => deleteRow()}>
+                <Trash className="mb-1" />
+            </Button>
+        </ButtonGroup>
     )
 }
 
