@@ -1,40 +1,43 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Appbar from "./components/Appbar/Appbar";
 import ProtectedRoute from "./components/ProtectedRoute";
-import VerificationForm from "./components/VerificationForm/VerificationForm";
-
-import Dashboard from "./views/Dashboard/Dashboard";
-import Profile from "./views/Profile/Profile";
-import Tools from "./views/Tools/Tools";
-import TopPlayed from "./views/TopPlayed/TopPlayed";
-import Playlists from "./views/Playlists/Playlists";
-import Schedules from "./views/Schedules/Schedules";
-import CreateSchedule from "./views/CreateSchedule/CreateSchedule";
-import SignIn from "./views/SignIn/SignIn";
 
 import logo from './logo.svg';
 import "./App.css"
+
+// Lazy imports for splitting code
+const Appbar = lazy(() => import("./components/Appbar/Appbar"));
+const VerificationForm = lazy(() => import("./components/VerificationForm/VerificationForm"));
+const TopPlayed = lazy(() => import("./views/TopPlayed/TopPlayed"));
+const Playlists = lazy(() => import("./views/Playlists/Playlists"));
+const Schedules = lazy(() => import("./views/Schedules/Schedules"));
+const CreateSchedule = lazy(() => import("./views/CreateSchedule/CreateSchedule"));
+const SignIn = lazy(() => import("./views/SignIn/SignIn"));
+const Dashboard = lazy(() => import("./views/Dashboard/Dashboard"));
+const Profile = lazy(() => import("./views/Profile/Profile"));
+const Tools = lazy(() => import("./views/Tools/Tools"));
 
 const App: FunctionComponent = () => {
 
   return (
     <BrowserRouter>
-      <Appbar logo={logo} title="Amplified" />
-      <Routes>
-        <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>
-          <Route path="/" element={<Tools />}></Route>
-          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>}></Route>
-          <Route path="/top-played" element={<ProtectedRoute><TopPlayed /></ProtectedRoute>}></Route>
-          <Route path="/sort-playlist" element={<ProtectedRoute><Playlists /></ProtectedRoute>}></Route>
-          <Route path="/schedules" element={<ProtectedRoute><Schedules /></ProtectedRoute>}></Route>
-          <Route path="/schedules/create" element={<ProtectedRoute><CreateSchedule /></ProtectedRoute>}></Route>
-          <Route path="/schedules/:scheduleId" element={<ProtectedRoute><CreateSchedule edit={true} /></ProtectedRoute>}></Route>
-        </Route>
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/verify" element={<VerificationForm />} />
-      </Routes>
+      <Suspense fallback={"Loading..."}>
+        <Appbar logo={logo} title="Amplified" />
+        <Routes>
+          <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>
+            <Route path="/" element={<Tools />}></Route>
+            <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>}></Route>
+            <Route path="/top-played" element={<ProtectedRoute><TopPlayed /></ProtectedRoute>}></Route>
+            <Route path="/sort-playlist" element={<ProtectedRoute><Playlists /></ProtectedRoute>}></Route>
+            <Route path="/schedules" element={<ProtectedRoute><Schedules /></ProtectedRoute>}></Route>
+            <Route path="/schedules/create" element={<ProtectedRoute><CreateSchedule /></ProtectedRoute>}></Route>
+            <Route path="/schedules/:scheduleId" element={<ProtectedRoute><CreateSchedule edit={true} /></ProtectedRoute>}></Route>
+          </Route>
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/verify" element={<VerificationForm />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 };

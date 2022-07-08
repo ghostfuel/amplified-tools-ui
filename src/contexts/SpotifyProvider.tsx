@@ -25,6 +25,8 @@ const SpotifyProvider: FunctionComponent<SpotifyProviderProps> = ({ children }) 
     const [spotifyTokens, setTokens] = useState<SpotifyTokens>();
 
     function setSpotifyTokens(access_token: string, refresh_token: string) {
+        window.localStorage.setItem("spotifyAccessToken", access_token);
+        window.localStorage.setItem("spotifyRefreshToken", refresh_token);
         setTokens({ access_token, refresh_token });
         setToken(access_token);
     }

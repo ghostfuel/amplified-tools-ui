@@ -38,21 +38,26 @@ const ProtectedRoute: FunctionComponent<ProtectedRouteProps> = ({ children }) =>
     // Check for Spotify Login
     // TODO: Refresh Token?
     if (isAuthenticated && !spotifyTokens?.access_token) {
-        // Check for Spotify Callback
-        if (location.search) {
+        const storedAccessToken = window.localStorage.getItem("spotifyAccessToken");
+        const storedRefreshToken = window.localStorage.getItem("spotifyRefreshToken");
+
+        if (storedAccessToken && storedRefreshToken) {
+            setSpotifyTokens(storedAccessToken, storedRefreshToken);
+        } else if (location.search) {
             const params = new URLSearchParams(location.search)
             const error = params.get("error")
             const errorDescription = params.get("errorDescription")
             const accessToken = params.get("access_token")
             const refreshToken = params.get("refresh_token")
 
-            // Update state and clear URL Params
+            if (error) {
+                console.log("Spotify failed to authorise", error, errorDescription);
+                // TODO: Error page... / Sign out
+            }
+
             if (accessToken && refreshToken) {
                 setSpotifyTokens(accessToken, refreshToken);
                 return <Navigate to={location.pathname} state={{ from: location }} replace />
-            } else {
-                console.log("Spotify failed to authorise", error, errorDescription);
-                // TODO: Error page... / Sign out
             }
         } else {
             // Redirect to API Gateway Spotify Authentication
