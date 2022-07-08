@@ -1,5 +1,4 @@
 import { FunctionComponent, useContext, useEffect, useState } from 'react';
-import axios from "axios";
 import { Button, FormControl, FormSelect, InputGroup } from "react-bootstrap";
 import { SpotifyContext, SpotifyContextType } from '../../contexts/SpotifyProvider';
 import { spotify } from '../../utils/spotifyApi';
@@ -11,7 +10,7 @@ const ScheduleForm: FunctionComponent = () => {
     const params = useParams();
     const navigate = useNavigate();
     const { idToken } = useContext(CognitoContext) as CognitoContextType;
-    const { spotifyTokens, setSpotifyTokens } = useContext(SpotifyContext) as SpotifyContextType;
+    const { spotifyTokens } = useContext(SpotifyContext) as SpotifyContextType;
 
     const [isEditing, setIsEditing] = useState(false);
     const [scheduleName, setScheduleName] = useState("");
