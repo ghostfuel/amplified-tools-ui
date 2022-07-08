@@ -40,8 +40,11 @@ const ProtectedRoute: FunctionComponent<ProtectedRouteProps> = ({ children }) =>
     if (isAuthenticated && !spotifyTokens?.access_token) {
         const storedAccessToken = window.localStorage.getItem("spotifyAccessToken");
         const storedRefreshToken = window.localStorage.getItem("spotifyRefreshToken");
+        const storedExpiryTime = window.localStorage.getItem("spotifyExpiresAt");
+        let expiresAt = storedExpiryTime ? new Date(storedExpiryTime) : new Date();
 
-        if (storedAccessToken && storedRefreshToken) {
+        // Check current spotify credentials are valid
+        if (storedAccessToken && storedRefreshToken && expiresAt > new Date()) {
             setSpotifyTokens(storedAccessToken, storedRefreshToken);
         } else if (location.search) {
             const params = new URLSearchParams(location.search)
@@ -49,6 +52,7 @@ const ProtectedRoute: FunctionComponent<ProtectedRouteProps> = ({ children }) =>
             const errorDescription = params.get("errorDescription")
             const accessToken = params.get("access_token")
             const refreshToken = params.get("refresh_token")
+            const expiresAt = params.get("expires_at") || "";
 
             if (error) {
                 console.log("Spotify failed to authorise", error, errorDescription);
@@ -57,6 +61,7 @@ const ProtectedRoute: FunctionComponent<ProtectedRouteProps> = ({ children }) =>
 
             if (accessToken && refreshToken) {
                 setSpotifyTokens(accessToken, refreshToken);
+                window.localStorage.setItem("spotifyExpiresAt", expiresAt);
                 return <Navigate to={location.pathname} state={{ from: location }} replace />
             }
         } else {
