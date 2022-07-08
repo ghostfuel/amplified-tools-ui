@@ -90,7 +90,7 @@ const ScheduleTable: FunctionComponent<ScheduleTableProps> = (props) => {
 
         getSchedules()
             .then(rowData => setRowData(rowData))
-            .then(() => gridRef.current.api.sizeColumnsToFit())
+            .then(() => gridRef?.current?.api?.sizeColumnsToFit())
     }, [idToken]);
 
     return (

@@ -32,19 +32,14 @@ const ScheduleForm: FunctionComponent = () => {
                 if (playlists) setPlaylists(playlists);
             } catch (error) {
                 console.error("Failed to fetch playlists", error);
-
-                if (axios.isAxiosError(error)) {
-                    if (error.code === "401") {
-                        // Reset Spotify tokens to force login
-                        setSpotifyTokens("", "");
-                    }
-                }
             }
         }
 
-        fetchPlaylists();
+        if (spotifyTokens) {
+            fetchPlaylists();
+        }
 
-    }, [setSpotifyTokens])
+    }, [spotifyTokens])
 
     // When playlists are fetched, update form if editing
     useEffect(() => {
