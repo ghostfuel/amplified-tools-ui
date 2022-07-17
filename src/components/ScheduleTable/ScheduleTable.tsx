@@ -42,12 +42,20 @@ const ScheduleTable: FunctionComponent<ScheduleTableProps> = (props) => {
                         }
                     } catch (error) {
                         console.error(`Failed to delete schedule ${scheduleId}`, error);
+                        return error
                     }
                 }
             },
             width: 80
         }
     ]);
+
+    const defaultColumnState = useMemo(() => ({
+        state: [
+            { colId: "createdAt", sort: "asc" }
+        ]
+    }), []);
+
 
     const defaultColDef = useMemo(() => ({
         sortable: true,
@@ -91,7 +99,8 @@ const ScheduleTable: FunctionComponent<ScheduleTableProps> = (props) => {
         getSchedules()
             .then(rowData => setRowData(rowData))
             .then(() => gridRef?.current?.api?.sizeColumnsToFit())
-    }, [idToken]);
+            .then(() => gridRef?.current?.columnApi?.applyColumnState(defaultColumnState))
+    }, [idToken, defaultColumnState]);
 
     return (
         <div className="ag-theme-amplified-dark" style={{ width: 'auto', height: 500 }}>

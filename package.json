@@ -2,6 +2,10 @@
   "name": "amplified-tools-ui",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Mitchell",
+    "url": "https://github.com/ghostfuel"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
