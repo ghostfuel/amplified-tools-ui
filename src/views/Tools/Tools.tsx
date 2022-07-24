@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { SortDown, CalendarWeek, PersonCircle, Award, CalendarPlus } from 'react-bootstrap-icons';
+import { SortDown, CalendarWeek, PersonCircle, Award, CalendarPlus, CalendarPlusFill } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 import "./Tools.css";
 
@@ -46,6 +46,14 @@ const Tools: FunctionComponent<ToolsProps> = (props) => {
                             <CalendarPlus id="tile-icon" fill="#212529" onClick={() => navigate("/schedules/create")} />
                         </div>
                         <div className="title">Create Schedule</div>
+                    </div>
+                </Col>
+                <Col>
+                    <div id="section-tiles">
+                        <div id="tile" className="bg-secondary">
+                            <CalendarPlusFill id="tile-icon" fill="#212529" onClick={() => navigate("/workflow/create")} />
+                        </div>
+                        <div className="title">Create Workflow <br /> (Demo, WIP)</div>
                     </div>
                 </Col>
                 <Col>
