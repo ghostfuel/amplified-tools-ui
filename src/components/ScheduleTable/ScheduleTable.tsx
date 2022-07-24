@@ -15,8 +15,8 @@ const ScheduleTable: FunctionComponent<ScheduleTableProps> = (props) => {
         { field: 'schedule' },
         { field: 'operation', width: 60 },
         { field: 'cadence', width: 55 },
-        { field: 'createdAt', headerName: 'Created', type: 'date', width: 80 },
-        { field: 'scheduledTimestamp', headerName: 'First run', type: 'date', width: 80 },
+        { field: 'createdAt', headerName: 'Created', type: 'date', width: 85 },
+        { field: 'scheduledTimestamp', headerName: 'First run', type: 'date', width: 85 },
         { field: 'runCount', headerName: 'Runs', width: 45 },
         { field: 'errorCount', headerName: 'Errors', width: 45 },
         // Hidden temporarily
