@@ -5,6 +5,7 @@ import BaseNode from './BaseNode';
 export type FilterNodeData = {
     operation: "filter";
     type: string;
+    label?: string;
     params?: {
     }
 }
@@ -12,10 +13,18 @@ export type FilterNodeData = {
 type FilterNodeProps = NodeProps<FilterNodeData>;
 
 const FilterNode: FunctionComponent<FilterNodeProps> = (prop: FilterNodeProps) => {
-    const { type } = prop.data;
+    const { type, label } = prop.data;
 
     return (
-        <BaseNode operation='filter' type={type} node={prop} data={JSON.stringify(prop.data)} target={true} source={true} />
+        <BaseNode
+            operation='filter'
+            type={type}
+            label={label}
+            node={prop}
+            data={JSON.stringify(prop.data)}
+            target={true}
+            source={true}
+        />
     );
 };
 

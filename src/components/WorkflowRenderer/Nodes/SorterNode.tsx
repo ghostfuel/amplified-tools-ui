@@ -5,6 +5,7 @@ import BaseNode from './BaseNode';
 export type SorterNodeData = {
     operation: "sorter";
     type: string;
+    label?: string;
     params?: {
     }
 }
@@ -12,10 +13,18 @@ export type SorterNodeData = {
 type SorterNodeProps = NodeProps<SorterNodeData>;
 
 const SorterNode: FunctionComponent<SorterNodeProps> = (prop: SorterNodeProps) => {
-    const { type } = prop.data;
+    const { type, label } = prop.data;
 
     return (
-        <BaseNode operation='sorter' type={type} node={prop} data={JSON.stringify(prop.data)} target={true} source={true} />
+        <BaseNode
+            operation='sorter'
+            type={type}
+            label={label}
+            node={prop}
+            data={JSON.stringify(prop.data)}
+            target={true}
+            source={true}
+        />
     );
 };
 

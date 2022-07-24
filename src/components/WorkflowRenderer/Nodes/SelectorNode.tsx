@@ -5,6 +5,7 @@ import BaseNode from './BaseNode';
 export type SelectorNodeData = {
     operation: "selector";
     type: string;
+    label?: string;
     params?: {
     }
 }
@@ -12,10 +13,18 @@ export type SelectorNodeData = {
 type SelectorNodeProps = NodeProps<SelectorNodeData>;
 
 const SelectorNode: FunctionComponent<SelectorNodeProps> = (prop: SelectorNodeProps) => {
-    const { type } = prop.data;
+    const { type, label } = prop.data;
 
     return (
-        <BaseNode operation='selector' type={type} node={prop} data={JSON.stringify(prop.data)} target={true} source={true} />
+        <BaseNode
+            operation='selector'
+            type={type}
+            label={label}
+            node={prop}
+            data={JSON.stringify(prop.data)}
+            target={true}
+            source={true}
+        />
     );
 };
 

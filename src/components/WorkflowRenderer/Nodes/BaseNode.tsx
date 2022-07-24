@@ -6,6 +6,7 @@ import { Handle, NodeProps, Position, useReactFlow } from 'react-flow-renderer';
 type BaseNodeProps = {
     operation: "source" | "selector" | "filter" | "sorter" | "action";
     type: string;
+    label?: string;
     onEdit?: () => {};
     onDelete?: () => {};
     target: boolean;
@@ -15,10 +16,9 @@ type BaseNodeProps = {
 }
 
 const BaseNode: FunctionComponent<BaseNodeProps> = (prop: BaseNodeProps) => {
-    const { operation, type, data, target, source, node } = prop;
+    const { operation, type, label, target, source, node } = prop;
 
     const reactFlowInstance = useReactFlow();
-
 
     let style = "primary";
     if (operation === "selector") style = "info"
@@ -58,7 +58,7 @@ const BaseNode: FunctionComponent<BaseNodeProps> = (prop: BaseNodeProps) => {
                 <Card.Body className="ps-2 pt-0 p-1 text-start" style={{ textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden", display: "inline-block" }}>
                     <sub className='text-capitalize'>{type}</sub>
                     <br />
-                    {data}
+                    {label}
                 </Card.Body>
             </Card>
             {source && <Handle id="a" type="source" position={Position.Bottom} style={{ height: 10, width: 10 }} />}
