@@ -3,17 +3,16 @@
 }
 
 #tile {
-  height: 150px;
-  width: 150px;
+  height: 125px;
   cursor: pointer;
   object-fit: cover;
   margin: 0 0 .5rem 0;
 }
 
 #tile-icon {
-  margin: 35px;
-  height: 80px;
-  width: 80px;
+  margin: 30px;
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
 }
 
 .column {

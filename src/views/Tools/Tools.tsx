@@ -12,7 +12,7 @@ const Tools: FunctionComponent<ToolsProps> = (props) => {
     return (
         <Col>
             <div id="section-title" className="text-left">Spotify</div>
-            <Row id="dashboard-tools" className='row-cols-auto'>
+            <Row id="dashboard-tools" className='row-cols-auto d-flex justify-content-center justify-content-sm-start'>
                 <Col>
                     <div id="section-tiles">
                         <div id="tile" className="bg-secondary">
@@ -31,7 +31,7 @@ const Tools: FunctionComponent<ToolsProps> = (props) => {
                 </Col>
             </Row>
             <div id="section-title" className="text-left">Tools</div>
-            <Row id="dashboard-tools" className='row-cols-auto'>
+            <Row id="dashboard-tools" className='row-cols-auto d-flex justify-content-center justify-content-sm-start'>
                 <Col>
                     <div id="section-tiles">
                         <div id="tile" className="bg-secondary">
