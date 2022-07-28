@@ -10,6 +10,8 @@ This React repository is for a homebrew project, [amplified.tools](https://www.a
 
 1. Create a new `config.ts` file based on [config.example.ts](./config.example.ts) which contains Amazon Cognito User Pool and Amplified.tools API config
 
+1. Clone and start [amplified-tools-api](https://github.com/ghostfuel/amplified-tools-api#readme)
+
 Run `npm start` to launch the development server at [http://localhost:3001](http://localhost:3001)
 
 ## Deployment
