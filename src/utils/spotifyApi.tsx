@@ -11,4 +11,4 @@ export const authURL = `${API.API_BASE_URL}/login`;
 // Setup Axios for Spotify API calls 
 export const apiURL = "https://api.spotify.com/v1";
 export const spotify = axios.create({ baseURL: apiURL });
-export const setToken = (token: string) => spotify.defaults.headers = { Authorization: `Bearer ${token}` };
+export const setToken = (token: string) => spotify.defaults.headers.common = { Authorization: `Bearer ${token}` };
